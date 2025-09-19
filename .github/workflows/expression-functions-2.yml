@@ -1,0 +1,21 @@
+---
+name: Expressions Function Example
+on:
+  push:
+    branches:
+      - main
+jobs:
+  expression_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Test Expressions
+        run: |
+          echo "Starts with test: ${{ startsWith('hello world', 'hello') }}"
+          echo "Ends with test: ${{ endsWith('hello world', 'world') }}"
+          echo "Contains test: ${{ contains('hello world', 'hello') }}"
+          echo "Format test: ${{ format('My number is {0}', 42) }}"
+      - name: Conditional Status Check
+        if: success()
+        run: echo "Workflow succeeded!"
